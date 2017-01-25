@@ -5,6 +5,7 @@ Created on 2014年2月20日\n
 @author:  lan (www.9miao.com)\n
 '''
 from gtwisted.core.base import Transport
+import gevent
 from gevent import Greenlet
 from gevent.socket import create_connection
 from gtwisted.utils import log
@@ -95,7 +96,7 @@ class ServerFactory:
         p = self.protocol(t,self)
         p.start()
         self.sessionno +=1
-        gevent.joinall((t, p)) #gevent 1.1+版本自动释放连接，需要在handler里面join 详见 https://github.com/gevent/gevent/issues/794
+        gevent.joinall((t, p))
         
 class ClientFactory:
     """客户端的协议工厂\n
